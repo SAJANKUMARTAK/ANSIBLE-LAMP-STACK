@@ -1,0 +1,26 @@
+---
+    - name: Install MariaDB server
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: Start and enable MariaDB service
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
+
+    - name: Set root password and remove test database
+      shell: |
+        mysql_secure_installation <<EOF
+        n
+        {{ mariadb_root_password }}
+        {{ mariadb_root_password }}
+        y
+        y
+        y
+        y
+        EOF
+      args:
+        executable: /bin/bash
+

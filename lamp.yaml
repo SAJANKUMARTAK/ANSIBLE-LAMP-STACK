@@ -1,0 +1,9 @@
+---
+  - name: lamp configured
+    hosts: Lamp-Server
+    become: yes
+    roles:
+        - apache
+        - php
+        - mysql
+      
